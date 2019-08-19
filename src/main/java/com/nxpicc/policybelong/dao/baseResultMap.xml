@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxpicc.policybelong.dao.baseResultMap">
+    <!--公共的resultMap-->
+    <resultMap id="policyMap" type="com.nxpicc.policybelong.entity.Policy">
+        <id property="proposalNo" column="proposalNo"/>
+        <result property="policyNo" column="policyNo"/>
+        <result property="classCode" column="classcode"/>
+        <result property="riskCode" column="riskcode"/>
+        <result property="projectCode" column="projectcode"/>
+        <result property="businessNature" column="businessnature"/>
+        <result property="agriFlag" column="agriflag"/>
+        <result property="operateDate" column="operatedate"/>
+        <result property="startDate" column="startDate"/>
+        <result property="endDate" column="endDate"/>
+        <result property="sumAmount" column="sumAmount"/>
+        <result property="sumPremium" column="sumPremium"/>
+        <result property="coinsPremium" column="coinsPremium"/>
+        <result property="sumSubPremium" column="sumSubPremium"/>
+        <result property="sumTaxfee" column="sumTaxfee"/>
+        <result property="sumNetPremium" column="sumNetPremium"/>
+        <result property="sumQuantity" column="sumQuantity"/>
+        <result property="insuredCount" column="insuredCount"/>
+        <result property="judicalScope" column="judicalScope"/>
+        <result property="argueSolution" column="argueSolution"/>
+        <result property="payTimes" column="payTimes"/>
+        <result property="makeCom" column="makeCom"/>
+        <result property="comCode" column="comCode"/>
+        <result property="handlerCode" column="handlerCode"/>
+        <result property="handlerName" column="handlerName"/>
+        <result property="handler1Code" column="handler1Code"/>
+        <result property="handler1Name" column="handler1Name"/>
+        <result property="approverCode" column="approverCode"/>
+        <result property="approverName" column="approverName"/>
+        <result property="checkFlag" column="checkFlag"/>
+        <result property="checkUpCode" column="checkUpCode"/>
+        <result property="checkOpinion" column="checkOpinion"/>
+        <result property="underwritenCode" column="underwritenCode"/>
+        <result property="underwriteName" column="underwriteName"/>
+        <result property="operatorCode" column="operatorCode"/>
+        <result property="operatorName" column="operatorName"/>
+        <result property="underwriteEndDate" column="underwriteEndDate"/>
+        <result property="agentCode" column="agentCode"/>
+        <result property="coinsFlag" column="coinsFlag"/>
+        <result property="crossFlag" column="crossFlag"/>
+        <result property="allinsFlag" column="allinsFlag"/>
+        <result property="underwriteFlag" column="underwriteFlag"/>
+        <result property="jfeeFlag" column="jfeeFlag"/>
+        <result property="policyRelCode" column="policyRelCode"/>
+        <result property="policyRelName" column="policyRelName"/>
+        <result property="payMode" column="payMode"/>
+        <result property="inputFlag" column="inputFlag"/>
+        <result property="antiPovertyFlag" column="antiPovertyFlag"/>
+        <result property="undwrtSubmitDate" column="undwrtSubmitDate"/>
+        <result property="othFlag" column="othFlag"/>
+        <result property="flag" column="flag"/>
+        <result property="remark" column="remark"/>
+        <result property="insertTimeForHis" column="insertTimeForHis"/>
+        <result property="operateTimeForHis" column="operateTimeForHis"/>
+        <result property="reinsFlag" column="reinsFlag"/>
+        <result property="pureRate" column="pureRate"/>
+        <result property="disRate" column="disRate"/>
+        <result property="disCount" column="disCount"/>
+        <result property="policyType" column="policyType"/>
+        <result property="sumDiscount" column="sumDiscount"/>
+        <result property="sumValue" column="sumValue"/>
+        <result property="managerSetFlag" column="managerSetFlag"/>
+        <result property="managerSetName" column="managerSetName"/>
+        <result property="managerSetterCode" column="managerSetterCode"/>
+        <result property="managerSetterName" column="managerSetterName"/>
+        <result property="managerSetDate" column="managerSetDate"/>
+        <result property="managerUpdateDate" column="managerUpdateDate"/>
+        <result property="managerShareSum" column="managerShareSum"/>
+    </resultMap>
+
+    <resultMap id="managerMap" type="com.nxpicc.policybelong.entity.Manager">
+        <id property="managerCode" column="managerCode"/>
+        <result property="managerName" column="managerName"/>
+        <result property="comCode" column="comCode"/>
+        <result property="comName" column="comName"/>
+        <result property="deptCode" column="departCode"/>
+        <result property="deptName" column="departName"/>
+        <result property="rankName" column="rankname"/>
+        <result property="rankCode" column="rankCode"/>
+        <result property="insertDate" column="insertDate"/>
+        <result property="updateDate" column="updateDate"/>
+        <result property="validFlag" column="validFlag"/>
+    </resultMap>
+
+    <resultMap id="policyBelongMap" type="com.nxpicc.policybelong.entity.PolicyBelong">
+        <id property="id" column="id"/>
+        <result property="policyNo" column="policyno"/>
+        <result property="policyFlag" column="policyFlag"/>
+        <result property="sumPremium" column="sumpremium"/>
+        <result property="managerCode" column="managercode"/>
+        <result property="managerName" column="managername"/>
+        <result property="comCode" column="comcode "/>
+        <result property="managerShare" column="managershare"/>
+        <result property="operateDate" column="operatedate"/>
+        <result property="insertDate" column="insertdate"/>
+        <result property="managerSetterCode" column="managersettercode"/>
+        <result property="managerSetterName" column="managersettername"/>
+        <result property="validFlag" column="validflag "/>
+        <result property="deptCode" column="deptcode "/>
+        <result property="deptName" column="deptname "/>
+    </resultMap>
+
+    <resultMap id="policyWithManagerMap" type="com.nxpicc.policybelong.entity.PolicyWithManager">
+        <id property="proposalNo" column="a_proposalNo"/>
+        <result property="policyNo" column="a_policyNo"/>
+        <association property="policy" javaType="com.nxpicc.policybelong.entity.Policy">
+            <id property="proposalNo" column="a_proposalNo"/>
+            <result property="policyNo" column="a_policyNo"/>
+            <result property="classCode" column="a_classcode"/>
+            <result property="riskCode" column="a_riskcode"/>
+            <result property="projectCode" column="a_projectcode"/>
+            <result property="businessNature" column="a_businessnature"/>
+            <result property="agriFlag" column="a_agriflag"/>
+            <result property="operateDate" column="a_operatedate"/>
+            <result property="startDate" column="a_startDate"/>
+            <result property="endDate" column="a_endDate"/>
+            <result property="sumAmount" column="a_sumAmount"/>
+            <result property="sumPremium" column="a_sumPremium"/>
+            <result property="coinsPremium" column="a_coinsPremium"/>
+            <result property="sumSubPremium" column="a_sumSubPremium"/>
+            <result property="sumTaxfee" column="a_sumTaxfee"/>
+            <result property="sumNetPremium" column="a_sumNetPremium"/>
+            <result property="sumQuantity" column="a_sumQuantity"/>
+            <result property="insuredCount" column="a_insuredCount"/>
+            <result property="judicalScope" column="a_judicalScope"/>
+            <result property="argueSolution" column="a_argueSolution"/>
+            <result property="payTimes" column="a_payTimes"/>
+            <result property="makeCom" column="a_makeCom"/>
+            <result property="comCode" column="a_comCode"/>
+            <result property="handlerCode" column="a_handlerCode"/>
+            <result property="handlerName" column="a_handlerName"/>
+            <result property="handler1Code" column="a_handler1Code"/>
+            <result property="handler1Name" column="a_handler1Name"/>
+            <result property="approverCode" column="a_approverCode"/>
+            <result property="approverName" column="a_approverName"/>
+            <result property="checkFlag" column="a_checkFlag"/>
+            <result property="checkUpCode" column="a_checkUpCode"/>
+            <result property="checkOpinion" column="a_checkOpinion"/>
+            <result property="underwriteCode" column="a_underwriteCode"/>
+            <result property="underwriteName" column="a_underwriteName"/>
+            <result property="operatorCode" column="a_operatorCode"/>
+            <result property="operatorName" column="a_operatorName"/>
+            <result property="underwriteEndDate" column="a_underwriteEndDate"/>
+            <result property="agentCode" column="a_agentCode"/>
+            <result property="coinsFlag" column="a_coinsFlag"/>
+            <result property="crossFlag" column="a_crossFlag"/>
+            <result property="allinsFlag" column="a_allinsFlag"/>
+            <result property="underwriteFlag" column="a_underwriteFlag"/>
+            <result property="jfeeFlag" column="a_jfeeFlag"/>
+            <result property="policyRelCode" column="a_policyRelCode"/>
+            <result property="policyRelName" column="a_policyRelName"/>
+            <result property="payMode" column="a_payMode"/>
+            <result property="inputFlag" column="a_inputFlag"/>
+            <result property="antiPovertyFlag" column="a_antiPovertyFlag"/>
+            <result property="undwrtSubmitDate" column="a_undwrtSubmitDate"/>
+            <result property="othFlag" column="a_othFlag"/>
+            <result property="flag" column="a_flag"/>
+            <result property="remark" column="a_remark"/>
+            <result property="insertTimeForHis" column="a_insertTimeForHis"/>
+            <result property="operateTimeForHis" column="a_operateTimeForHis"/>
+            <result property="reinsFlag" column="a_reinsFlag"/>
+            <result property="pureRate" column="a_pureRate"/>
+            <result property="disRate" column="a_disRate"/>
+            <result property="disCount" column="disCount"/>
+            <result property="policyType" column="a_policyType"/>
+            <result property="sumDiscount" column="a_sumDiscount"/>
+            <result property="sumValue" column="a_sumValue"/>
+            <result property="managerSetFlag" column="a_managerSetFlag"/>
+            <result property="managerSetName" column="a_managerSetName"/>
+            <result property="managerSetterCode" column="a_managerSetterCode"/>
+            <result property="managerSetterName" column="a_managerSetterName"/>
+            <result property="managerSetDate" column="a_managerSetDate"/>
+            <result property="managerUpdateDate" column="a_managerUpdateDate"/>
+            <result property="managerShareSum" column="a_managerShareSum"/>
+        </association>
+        <collection property="policyBelongList" ofType="com.nxpicc.policybelong.entity.PolicyBelong" javaType="java.util.List">
+            <id property="id" column="id"/>
+            <result property="policyNo" column="b_policyno"/>
+            <result property="policyFlag" column="b_policyFlag"/>
+            <result property="sumPremium" column="b_sumpremium"/>
+            <result property="managerCode" column="b_managercode"/>
+            <result property="managerName" column="b_managername"/>
+            <result property="comCode" column="b_comcode "/>
+            <result property="managerShare" column="b_managershare"/>
+            <result property="operateDate" column="b_operatedate"/>
+            <result property="insertDate" column="b_insertdate"/>
+            <result property="managerSetterCode" column="b_managersettercode"/>
+            <result property="managerSetterName" column="b_managersettername"/>
+            <result property="validFlag" column="b_validflag "/>
+            <result property="deptCode" column="b_deptcode "/>
+            <result property="deptName" column="b_deptname "/>
+        </collection>
+    </resultMap>
+
+ <!--       <resultMap id="policyWithManagerMap" type="com.nxpicc.policybelong.entity.PolicyWithManager">
+            <id property="policyNo" javaType="java.lang.String" column="policyNo"></id>
+            <result property="proposalNo" javaType="java.lang.String" column="proposalNo"></result>
+            <association property="policy" javaType="com.nxpicc.policybelong.entity.Policy">
+            </association>
+            <collection property="policyBelongList" ofType="com.nxpicc.policybelong.entity.PolicyBelong">
+                <id property="id" column="id"/>
+                <result property="policyNo" column="policyno"/>
+                <result property="policyFlag" column="policyflag"/>
+                <result property="sumPremium" column="sumpremium"/>
+                <result property="managerCode" column="managercode"/>
+            </collection>
+        </resultMap>-->
+
+</mapper>

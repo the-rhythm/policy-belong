@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxpicc.policybelong.dao.ManagerDao">
+    <select id="findManager" resultMap="com.nxpicc.policybelong.dao.baseResultMap.managerMap" parameterType="com.nxpicc.policybelong.vo.ManagerQueryVo">
+        select * from hrjx_manager_info
+        where validFlag='1'
+        <if test="managerCode != null and managerCode != ''">
+            AND managerCode = #{managerCode}
+        </if>
+        <if test="managerName != null and managerName != ''">
+            AND managerName like '${managerName}%'
+        </if>
+        <if test="comCode != null and comCode != ''">
+            AND comCode = #{comCode}
+        </if>
+        <if test="comName != null and comName != ''">
+            AND comName like '${comName}%'
+        </if>
+        <if test="rankCode != null and rankCode != ''">
+            AND rankCode = '${rankCode}%'
+        </if>
+        <if test="rankName != null and rankName != ''">
+            AND rankName like '${rankName}%'
+        </if>
+    </select>
+
+</mapper>

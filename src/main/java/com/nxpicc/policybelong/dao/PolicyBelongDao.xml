@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxpicc.policybelong.dao.PolicyBelongDao">
+
+    <!--插入一条归属记录-->
+    <insert id="insertPolicyBelong" parameterType="com.nxpicc.policybelong.entity.PolicyBelong">
+        insert into hrjx_agri_policybelong (id,proposalno, policyno, policyflag, sumpremium, managercode, managername, comcode, managershare, operatedate, insertdate, managersettercode, managersettername, validflag,deptcode,deptname)
+                                 values (#{id},#{proposalNo},#{policyNo},#{policyFlag},#{sumPremium},#{managerCode},#{managerName},#{comCode},#{managerShare},#{operateDate},#{insertDate},#{managerSetterCode},#{managerSetterName},#{validFlag},#{deptCode},#{deptName})
+    </insert>
+    <!--删除一条归属记录 -->
+    <delete id="deletePolicyBelong" parameterType="com.nxpicc.policybelong.entity.PolicyBelong">
+        delete from hrjx_agri_policybelong where id=#{id}
+    </delete>
+    <!--使一条归属记录失效-->
+    <update id="invalidPolicyBelong" parameterType="com.nxpicc.policybelong.entity.PolicyBelong">
+        update hrjx_agri_policybelong set validFlag=${01} where id=#{id};
+    </update>
+    <!--批量插入保单归属信息-->
+    <insert id="insertPolicyBelongs" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into hrjx_agri_policybelong (id, policyno, policyflag, sumpremium, managercode, managername, comcode,
+        managershare, operatedate, insertdate, managersettercode, managersettername, validflag,deptcode,deptname)
+        values
+        <foreach collection="policyBelongList" item="policyBelong" index="index" separator=",">
+            (
+            #{policyBelong.id},
+            #{policyBelong.policyNo},
+            #{policyBelong.policyFlag},
+            #{policyBelong.sumPremium},
+            #{policyBelong.managerCode},
+            #{policyBelong.managerName},
+            #{policyBelong.comCode},
+            #{policyBelong.managerShare},
+            #{policyBelong.operateDate},
+            #{policyBelong.insertDate},
+            #{policyBelong.managerSetterCode},
+            #{policyBelong.managerSetterName},
+            #{policyBelong.validFlag},
+            #{policyBelong.deptCode},
+            #{policyBelong.deptName}
+            )
+        </foreach>
+    </insert>
+     <!--根据保单号查询保单所有的贡献客户经理-->
+    <select id="findPolicyBelongByPolicyNo" resultType="com.nxpicc.policybelong.entity.PolicyBelong">
+        select * from hrjx_agri_policybelong where policyNo=#{policyNo}
+    </select>
+
+</mapper>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxpicc.policybelong.dao.PolicyDao">
+
+    <!--根据保单号查询保单-->
+    <select id="findPolicyByPolicyNo" resultMap="com.nxpicc.policybelong.dao.baseResultMap.policyMap">
+       select * from hrjx_agri_bdjbxxb where policyno=#{policyno}
+    </select>
+    <!--根据投保单号查询保单-->
+    <select id="findPolicyByProposalNo" resultMap="com.nxpicc.policybelong.dao.baseResultMap.policyMap">
+       select * from hrjx_agri_bdjbxxb where proposalNo=#{proposalNo}
+    </select>
+    <!--根据保单号划定保单归属 客户经理-->
+    <update id="setPolicyManager" parameterType="com.nxpicc.policybelong.entity.Policy">
+        update hrjx_agri_bdjbxxb set
+        managerSetFlag=#{managerSetFlag},
+        managerSetName=#{managerSetName},
+        managerSetterCode=#{managerSetterCode},
+        managerSetterName=#{managerSetterName},
+        managerSetDate=#{managerSetDate},
+        managerUpdateDate=#{managerUpdateDate}
+        where policyno=#{policyNo}
+    </update>
+    <!--根据policyNo 查询带归属客户经理的保单信息-->
+    <select id="findPoliciesWithManager" parameterType="com.nxpicc.policybelong.vo.PolicyQueryVo"
+            resultMap="com.nxpicc.policybelong.dao.baseResultMap.policyWithManagerMap">
+        select
+        ta.proposalNo as a_proposalNo,
+        ta.policyNo as a_policyNo,
+        ta.classCode as a_classcode,
+        ta.riskCode as a_riskcode,
+        ta.projectCode as a_projectcode,
+        ta.businessNature as a_businessnature,
+        ta.agriFlag as a_agriflag,
+        ta.operateDate as a_operatedate,
+        ta.startDate as a_startDate,
+        ta.endDate as a_endDate,
+        ta.sumAmount as a_sumAmount,
+        ta.sumPremium as a_sumPremium,
+        ta.coinsPremium  as a_coinsPremium,
+        ta.sumSubPrem as a_sumSubPrem,
+        ta.sumTaxfee as  a_sumTaxfee,
+        ta.sumNetPremium  as a_sumNetPremium,
+        ta.sumQuantity as a_sumQuantity,
+         ta.insuredCount as a_insuredCount,
+        ta.judicalScope as  a_judicalScope,
+        ta.argueSolution as a_argueSolution,
+        ta.payTimes as a_payTimes,
+        ta.makeCom as a_makeCom,
+        ta.comCode as a_comCode,
+         ta.handlerCode as  a_handlerCode,
+        ta.handlerName as a_handlerName,
+        ta.handler1Code as a_handler1Code,
+        ta.handler1Name as a_handler1Name,
+        ta.approverCode as a_approverCode,
+        ta.approverName as a_approverName,
+        ta.checkFlag as a_checkFlag,
+        ta.checkUpCode as a_checkUpCode,
+        ta.checkOpinion as a_checkOpinion,
+        ta.underwriteCode as a_underwriteCode,
+        ta.underwriteName as a_underwriteName,
+        ta.operatorCode as a_operatorCode,
+        ta.operatorName as a_operatorName,
+        ta.underwriteEndDate as a_underwriteEndDate,
+        ta.agentCode as a_agentCode,
+        ta.coinsFlag as a_coinsFlag,
+        ta.crossFlag as a_crossFlag,
+        ta.allinsFlag as a_allinsFlag,
+        ta.underwriteFlag as a_underwriteFlag,
+        ta.jfeeFlag as a_jfeeFlag,
+        ta.policyRelCode as a_policyRelCode,
+        ta.policyRelName as a_policyRelName,
+        ta.payMode as a_payMode,
+        ta.inputFlag as a_inputFlag,
+        ta.antiPovertyFlag as a_antiPovertyFlag,
+        ta.undwrtSubmitDate as a_undwrtSubmitDate,
+        ta.othFlag as  a_othFlag,
+        ta.flag as a_flag,
+        ta.remark as a_remark,
+        ta.insertTimeForHis as  a_insertTimeForHis,
+        ta.operateTimeForHis as a_operateTimeForHis,
+        ta.reinsFlag as a_reinsFlag,
+        ta.pureRate as a_pureRate,
+        ta.disRate as a_disRate,
+        ta.disCount as disCount,
+        ta.policyType as a_policyType,
+        ta.sumDiscount as a_sumDiscount,
+        ta.sumValue as a_sumValue,
+        ta.managerSetFlag as a_managerSetFlag,
+        ta.managerSetName as a_managerSetName,
+        ta.managerSetterCode as a_managerSetterCode,
+        ta.managerSetterName as a_managerSetterName,
+        ta.managerSetDate as a_managerSetDate,
+        ta.managerUpdateDate as a_managerUpdateDate,
+        ta.managerShareSum as a_managerShareSum,
+        tb.id,
+        tb.policyno as b_policyno,
+        tb.proposalno as b_proposalno,
+        tb.policyflag as b_policyflag ,
+        tb.sumpremium as b_sumpremium,
+        tb.managercode as b_managercode,
+        tb.managername as b_managername,
+        tb.comcode as b_comcode,
+        tb.managershare as b_managershare,
+        tb.operatedate as b_operatedate,
+        tb.insertdate as b_insertdate,
+        tb.managersettercode as b_managersettercode,
+        tb.managersettername as b_managersettername,
+        tb.validflag as b_validflag,
+        tb.deptcode as b_deptcode,
+        tb.deptname as b_deptname
+        from
+        hrjx_agri_bdjbxxb ta
+        left outer join
+        hrjx_agri_policybelong tb
+        on
+        ta.proposalno=tb.proposalno
+        where 1=1
+        <if test="policyNo != null and policyNo != ''">
+            AND ta.policyno = #{policyNo}
+        </if>
+        <if test="proposalNo != null and proposalNo != ''">
+            AND ta.proposalno = #{proposalNo}
+        </if>
+        <if test="riskCode != null and riskCode !=''">
+            AND ta.riskcode = #{riskCode}
+        </if>
+        <if test="comCode != null and comCode !=''">
+            AND ta.comcode like '${comCode}%'
+        </if>
+        <if test="comName != null and comName !=''">
+            AND ta.comcode like '${comName}%'
+        </if>
+        <if test="startDateS != null">
+            AND ta.startDate &gt;=#{startDateS}
+        </if>
+        <if test="startDateE != null">
+            AND ta.startDate &lt;= #{startDateE}
+        </if>
+        <if test="endDateS != null">
+            AND ta.endDate &gt;=#{endDateS}
+        </if>
+        <if test="endDateE != null">
+            AND ta.endDate &lt;= #{endDateE}
+        </if>
+        <if test="operateDateS != null">
+            AND ta.operateDate &gt;= #{operateDateS}
+        </if>
+        <if test="operateDateE != null">
+            AND ta.operateDate &lt;=#{operateDateE}
+        </if>
+        <if test="underwriteEndDateS != null">
+            AND ta.underwriteEndDate &gt;=#{underwriteEndDateS}
+        </if>
+        <if test="underwriteEndDateE != null">
+            AND ta.underwriteEndDate &lt;= #{underwriteEndDateE}
+        </if>
+    </select>
+    <!--根据保单号或者投保单号查询保单归属信息-->
+    <select id="findPolicyWithManagerByPolicyNo" resultMap="com.nxpicc.policybelong.dao.baseResultMap.policyWithManagerMap">
+        select ta.*,
+        tb.*
+        from
+        hrjx_agri_bdjbxxb ta
+        left outer join
+        hrjx_agri_policybelong tb
+        on
+        ta.policyno=tb.policyno
+        where
+        <if test="policyNo != null and policyNo != ''">
+            and policyNo = #{policyNo}
+        </if>
+        <if test="proposalNo != null and proposalNo != ''">
+            and proposalNo = #{proposalNo}
+        </if>
+    </select>
+    <!--查询某个保单的份额和-->
+    <select id="countShareSum" resultType="java.lang.Integer">
+        select nvl(sum(managershare),0) from hrjx_agri_policybelong
+        where validflag='1'
+        <if test="policyNo != null and policyNo != ''">
+            and policyno = #{policyNo}
+        </if>
+        <if test="proposalNo != null and proposalNo != ''">
+            and proposalno = #{proposalNo}
+        </if>
+        group by policyno
+    </select>
+   <!--查询某个保单的客户经理数量 -->
+
+    <!--更新保单归属信息-->
+    <update id="updateShareSum">
+        update hrjx_agri_bdjbxxb set  managersharesum=#{managerShareSum}
+        where 1=1
+        <if test="policyNo != null and policyNo != ''">
+            and policyNo = #{policyNo}
+        </if>
+        <if test="proposalNo != null and proposalNo != ''">
+            and proposalNo = #{proposalNo}
+        </if>
+    </update>
+
+    <update id="updatePolicyByPolicyBelong" parameterType="com.nxpicc.policybelong.entity.PolicyBelong">
+        update hrjx_agri_bdjbxxb set
+        managersetflag='1',
+        managersetname='手工清分',
+        managersettercode=#{managerSetterCode},
+        managersettername=#{managerSetterName},
+        managersetDate=#{insertDate}
+        where policyno=#{policyNo}
+    </update>
+
+    <select id="countMangerNums" resultType="java.lang.Integer">
+        select nvl(count(proposalno),0) from hrjx_agri_policybelong
+        where validflag='1'
+        <if test="policyNo != null and policyNo != ''">
+            and policyno = #{policyNo}
+        </if>
+        <if test="proposalNo != null and proposalNo != ''">
+            and proposalno = #{proposalNo}
+        </if>
+    </select>
+
+    <update id="updateManagerNums">
+        update hrjx_agri_bdjbxxb set  managernums=#{managerNums}
+        where 1=1
+        <if test="policyNo != null and policyNo != ''">
+            and policyno = #{policyNo}
+        </if>
+        <if test="proposalNo != null and proposalNo != ''">
+            and proposalno = #{proposalNo}
+        </if>
+    </update>
+
+</mapper>
